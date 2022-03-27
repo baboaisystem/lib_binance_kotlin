@@ -1,6 +1,7 @@
 package com.baboaisystem.binancechainkit.sample
 
 import com.baboaisystem.binancechainkit.BinanceChainKit
+import com.baboaisystem.binancechainkit.models.TransactionFilterType
 import com.baboaisystem.binancechainkit.models.TransactionInfo
 import io.reactivex.Flowable
 import io.reactivex.Single
@@ -36,6 +37,16 @@ class BinanceAdapter(private val binanceChainKit: BinanceChainKit, tokenSymbol: 
     }
 
     fun transactions(fromTransactionHash: String? = null, limit: Int? = null): Single<List<TransactionInfo>> {
-        return binanceChainKit.transactions(asset, fromTransactionHash, limit)
+        //return binanceChainKit.transactions(asset, asset.getTransactionsFlowable(), fromTransactionHash, limit)
+        return binanceChainKit.transactions(asset, filterType = null, fromTransactionHash = fromTransactionHash,
+            limit = limit
+        )
+    }
+
+    fun transactions(fromTransactionHash: String? = null, filterType: TransactionFilterType, limit: Int? = null): Single<List<TransactionInfo>> {
+        //return binanceChainKit.transactions(asset, asset.getTransactionsFlowable(), fromTransactionHash, limit)
+        return binanceChainKit.transactions(asset, filterType = filterType, fromTransactionHash = fromTransactionHash,
+            limit = limit
+        )
     }
 }
